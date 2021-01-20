@@ -10,6 +10,8 @@ export const actionTypes = {
     deleteSensorResponse: 'DELETE_SENSOR_RESPONSE',
     updateSensorRequest: 'UPDATE_SENSOR_REQUEST',
     updateSensorResponse: 'UPDATE_SENSOR_RESPONSE',
+    healthRequest: 'HEALTH_REQUEST',
+    healthResponse: 'HEALTH_RESPONSE',
     logout: 'LOGOUT'
 };
 
@@ -60,3 +62,10 @@ export const logoutRequest = () => {
     return { type: actionTypes.logout }
 };
 
+export const healthRequest = () => {
+    return { type: actionTypes.healthRequest}
+}
+
+export const healthResponse = (payload) => {
+    return { type: actionTypes.healthResponse, payload }
+};

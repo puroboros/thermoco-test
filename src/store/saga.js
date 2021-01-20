@@ -1,6 +1,6 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects'
-import { actionTypes, loginResponse, sensorResponse, sensorsResponse, userResponse } from './actions';
-import { deleteSensor, getSensor, getSensors, login, updateSensor, getMe } from '../constants/api.constants';
+import { actionTypes, healthRequest, healthResponse, loginResponse, sensorResponse, sensorsResponse, userResponse } from './actions';
+import { deleteSensor, getSensor, getSensors, login, updateSensor, getMe, getHealth } from '../constants/api.constants';
 import { push } from 'connected-react-router';
 import { paths } from '../routes/routes';
 import { getToken } from './reducer';
@@ -60,6 +60,17 @@ const updateSensorEffect = function* (action) {
         console.error('saga error', error);
     }
 };
+const fetchHealthEffect = function* () {
+    try {
+        const health = yield call(getHealth);
+        yield put(healthResponse(health));
+        console.log('healthh ', health);
+    } catch (e) {
+        console.log('catch');
+        yield put(healthResponse({ offline: true }));
+    }
+
+};
 
 
 export const coreSaga = function* () {
@@ -68,4 +79,5 @@ export const coreSaga = function* () {
     yield takeEvery(actionTypes.sensorRequest, fetchSensorEffect);
     yield takeEvery(actionTypes.deleteSensorRequest, deleteSensorEffect);
     yield takeEvery(actionTypes.updateSensorRequest, updateSensorEffect);
+    yield takeEvery(actionTypes.healthRequest, fetchHealthEffect);
 };
