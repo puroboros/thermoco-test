@@ -1,0 +1,19 @@
+.header {
+  background-color: lightgray;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.username {
+  position: absolute;
+  right: 15px;
+}
+
+.logout {
+  cursor: pointer;
+  color: blue;
+}
